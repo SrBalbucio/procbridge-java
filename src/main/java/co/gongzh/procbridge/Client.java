@@ -70,6 +70,7 @@ public class Client {
                     respPayload[0] = entry.getValue();
 
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                     innerException[0] = ex;
                 }
             };
@@ -81,6 +82,7 @@ public class Client {
                 guard.execute(task);
             }
         } catch (IOException ex) {
+            ex.printStackTrace();
             throw new ClientException(ex);
         }
 
