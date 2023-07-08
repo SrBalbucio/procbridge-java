@@ -81,6 +81,7 @@ public class Server {
                         executor.execute(conn);
                     }
                 } catch (IOException ignored) {
+                    ignored.printStackTrace();
                     return; // finish listener
                 }
             }
@@ -130,6 +131,7 @@ public class Server {
                 try {
                     result = delegate.handleRequest(method, payload);
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                     exception = ex;
                 }
 
