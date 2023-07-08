@@ -90,8 +90,8 @@ public class Client {
             throw new RuntimeException(innerException[0]);
         }
 
-        if (respStatusCode[0] != StatusCode.GOOD_RESPONSE) {
-            throw new ServerException((String) respPayload[0]);
+        if(respStatusCode[0] == StatusCode.BAD_RESPONSE){
+            throw new ServerException("Bad Response: "+respPayload[0]+" ("+respPayload.length+")");
         }
 
         return respPayload[0];
