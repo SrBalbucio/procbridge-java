@@ -9,6 +9,7 @@ import org.junit.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -68,7 +69,7 @@ public class ServerClientTest {
         Object reply = client.request("echo", 123);
         assertEquals(123, reply);
         reply = client.request("echo", 3.14);
-        assertEquals(3.14, reply);
+        assertEquals(new BigDecimal("3.14"),  reply);
         reply = client.request("echo", "hello");
         assertEquals("hello", reply);
         reply = client.request("echo", Arrays.asList(1, 2, 3));

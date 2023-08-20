@@ -87,7 +87,7 @@ public final class Protocol {
         }
 
         buffer.flush();
-        buf = buffer.toByteArray();
+        buf = CompressUtil.decompress(buffer.toByteArray());
 
         try {
             String jsonText = new String(buf, StandardCharsets.UTF_8);
@@ -113,7 +113,7 @@ public final class Protocol {
         stream.write(0);
 
         // make json object
-        byte[] buf = body.toString().getBytes(StandardCharsets.UTF_8);
+        byte[] buf = CompressUtil.compress(body.toString().getBytes(StandardCharsets.UTF_8));
 
         // 5. LENGTH (4-byte, little endian)
         int len = buf.length;
