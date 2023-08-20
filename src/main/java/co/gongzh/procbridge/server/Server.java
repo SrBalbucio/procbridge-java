@@ -1,5 +1,7 @@
-package co.gongzh.procbridge;
+package co.gongzh.procbridge.server;
 
+import co.gongzh.procbridge.exception.ServerException;
+import co.gongzh.procbridge.utils.Protocol;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

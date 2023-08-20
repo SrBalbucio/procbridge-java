@@ -1,23 +1,23 @@
-package co.gongzh.procbridge;
+package co.gongzh.procbridge.utils;
 
+import co.gongzh.procbridge.exception.TimeoutException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Semaphore;
 
 /**
  * @author Gong Zhang
  */
-final class TimeoutExecutor implements Executor {
+public final class TimeoutExecutor implements Executor {
 
     private final long timeout;
     private final @Nullable Executor base;
 
-    TimeoutExecutor(long timeout, @Nullable Executor base) {
+    public TimeoutExecutor(long timeout, @Nullable Executor base) {
         this.timeout = timeout;
         this.base = base;
     }

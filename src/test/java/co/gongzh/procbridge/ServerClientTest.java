@@ -1,5 +1,8 @@
 package co.gongzh.procbridge;
 
+import co.gongzh.procbridge.client.Client;
+import co.gongzh.procbridge.exception.ServerException;
+import co.gongzh.procbridge.server.Server;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.*;

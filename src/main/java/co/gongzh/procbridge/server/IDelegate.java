@@ -1,4 +1,4 @@
-package co.gongzh.procbridge;
+package co.gongzh.procbridge.server;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

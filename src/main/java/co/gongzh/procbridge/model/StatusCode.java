@@ -1,19 +1,19 @@
-package co.gongzh.procbridge;
+package co.gongzh.procbridge.model;
 
 import org.jetbrains.annotations.Nullable;
 
-enum StatusCode {
+public enum StatusCode {
 
     REQUEST(0), GOOD_RESPONSE(1), BAD_RESPONSE(2);
 
-    int rawValue;
+    public int rawValue;
 
     StatusCode(int rawValue) {
         this.rawValue = rawValue;
     }
 
     @Nullable
-    static StatusCode fromRawValue(int rawValue) {
+    public static StatusCode fromRawValue(int rawValue) {
         for (StatusCode sc : StatusCode.values()) {
             if (sc.rawValue == rawValue) {
                 return sc;

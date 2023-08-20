@@ -1,14 +1,18 @@
-package co.gongzh.procbridge;
+package co.gongzh.procbridge.client;
 
+import co.gongzh.procbridge.exception.ClientException;
+import co.gongzh.procbridge.exception.ServerException;
+import co.gongzh.procbridge.exception.TimeoutException;
+import co.gongzh.procbridge.model.StatusCode;
+import co.gongzh.procbridge.utils.Protocol;
+import co.gongzh.procbridge.utils.TimeoutExecutor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.concurrent.Executor;
 

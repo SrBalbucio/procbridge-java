@@ -1,8 +1,8 @@
-package co.gongzh.procbridge;
+package co.gongzh.procbridge.exception;
 
 public final class ClientException extends RuntimeException {
 
-    ClientException(Throwable cause) {
+    public ClientException(Throwable cause) {
         super(cause);
     }
 

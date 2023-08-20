@@ -1,8 +1,8 @@
-package co.gongzh.procbridge;
+package co.gongzh.procbridge.exception;
 
 public final class TimeoutException extends RuntimeException {
 
-    TimeoutException() {
+    public TimeoutException() {
         super();
     }
 

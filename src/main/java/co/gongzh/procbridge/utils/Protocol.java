@@ -1,5 +1,9 @@
-package co.gongzh.procbridge;
+package co.gongzh.procbridge.utils;
 
+import co.gongzh.procbridge.exception.ProtocolException;
+import co.gongzh.procbridge.model.Keys;
+import co.gongzh.procbridge.model.StatusCode;
+import co.gongzh.procbridge.model.Versions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
@@ -12,14 +16,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.AbstractMap;
 import java.util.Map;
 
-import static co.gongzh.procbridge.ProtocolException.*;
+import static co.gongzh.procbridge.exception.ProtocolException.*;
 
 
-final class Protocol {
+public final class Protocol {
 
-    private static final byte[] FLAG = { 'p', 'b' };
+    public static final byte[] FLAG = { 'p', 'b' };
 
-    private static @NotNull Map.Entry<StatusCode, JSONObject> read(@NotNull InputStream stream) throws IOException, ProtocolException {
+    public static @NotNull Map.Entry<StatusCode, JSONObject> read(@NotNull InputStream stream) throws IOException, ProtocolException {
         int b;
 
         // 1. FLAG
@@ -94,7 +98,7 @@ final class Protocol {
         }
     }
 
-    private static void write(@NotNull OutputStream stream, @NotNull StatusCode statusCode, @NotNull JSONObject body) throws IOException {
+     public static void write(@NotNull OutputStream stream, @NotNull StatusCode statusCode, @NotNull JSONObject body) throws IOException {
         // 1. FLAG 'p', 'b'
         stream.write(FLAG);
 
@@ -128,7 +132,7 @@ final class Protocol {
         stream.flush();
     }
 
-    static @NotNull Map.Entry<String, Object> readRequest(@NotNull InputStream stream) throws IOException, ProtocolException {
+    public static @NotNull Map.Entry<String, Object> readRequest(@NotNull InputStream stream) throws IOException, ProtocolException {
         Map.Entry<StatusCode, JSONObject> entry = read(stream);
         StatusCode statusCode = entry.getKey();
         JSONObject body = entry.getValue();
@@ -140,7 +144,7 @@ final class Protocol {
         return new AbstractMap.SimpleEntry<>(method, payload);
     }
 
-    static @NotNull Map.Entry<StatusCode, Object> readResponse(@NotNull InputStream stream) throws IOException, ProtocolException {
+    public static @NotNull Map.Entry<StatusCode, Object> readResponse(@NotNull InputStream stream) throws IOException, ProtocolException {
         Map.Entry<StatusCode, JSONObject> entry = read(stream);
         StatusCode statusCode = entry.getKey();
         JSONObject body = entry.getValue();
@@ -153,7 +157,7 @@ final class Protocol {
         }
     }
 
-    static void writeRequest(@NotNull OutputStream stream, @Nullable String method, @Nullable Object payload) throws IOException {
+    public static void writeRequest(@NotNull OutputStream stream, @Nullable String method, @Nullable Object payload) throws IOException {
         JSONObject body = new JSONObject();
         if (method != null) {
             body.put(Keys.METHOD, method);
@@ -164,7 +168,7 @@ final class Protocol {
         write(stream, StatusCode.REQUEST, body);
     }
 
-    static void writeGoodResponse(@NotNull OutputStream stream, @Nullable Object payload) throws IOException {
+    public static void writeGoodResponse(@NotNull OutputStream stream, @Nullable Object payload) throws IOException {
         JSONObject body = new JSONObject();
         if (payload != null) {
             body.put(Keys.PAYLOAD, payload);
@@ -172,7 +176,7 @@ final class Protocol {
         write(stream, StatusCode.GOOD_RESPONSE, body);
     }
 
-    static void writeBadResponse(@NotNull OutputStream stream, @Nullable String message) throws IOException {
+    public static void writeBadResponse(@NotNull OutputStream stream, @Nullable String message) throws IOException {
         JSONObject body = new JSONObject();
         if (message != null) {
             body.put(Keys.MESSAGE, message);
