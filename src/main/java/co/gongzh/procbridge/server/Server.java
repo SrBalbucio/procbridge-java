@@ -69,7 +69,7 @@ public class Server {
         }
 
         this.serverSocket = getServerSocket();
-        ExecutorService executor = Executors.newCachedThreadPool();
+        this.executor = Executors.newCachedThreadPool();
 
         Thread serverThread = new Thread(() -> {
             try {

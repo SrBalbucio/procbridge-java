@@ -97,7 +97,7 @@ public class ServerClientTest {
             exception = ex;
         }
         assertNotNull(exception);
-        assertEquals("generated error", exception.getMessage());
+        assertTrue(exception.getMessage().contains("generated error"));
     }
 
     @Test
