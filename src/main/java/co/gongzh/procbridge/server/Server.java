@@ -2,6 +2,7 @@ package co.gongzh.procbridge.server;
 
 import co.gongzh.procbridge.exception.ServerException;
 import co.gongzh.procbridge.utils.Protocol;
+import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,39 +57,28 @@ public class Server {
         this.logger = logger;
     }
 
+    @SneakyThrows
     public synchronized void start() {
         if (started) {
             throw new IllegalStateException("server already started");
         }
 
-        final ServerSocket serverSocket;
-        try {
-            serverSocket = new ServerSocket(this.port);
-        } catch (IOException e) {
-            throw new ServerException(e);
-        }
-        this.serverSocket = serverSocket;
+        this.serverSocket = new ServerSocket(this.port);
+        ExecutorService executor = Executors.newCachedThreadPool();
 
-        final ExecutorService executor = Executors.newCachedThreadPool();
-        this.executor = executor;
-        executor.execute(() -> {
-            while (true) {
-                try {
+        Thread serverThread = new Thread(() -> {
+            try {
+                while (true) {
                     Socket socket = serverSocket.accept();
                     Connection conn = new Connection(socket, delegate);
-                    synchronized (Server.this) {
-                        if (!started) {
-                            return; // finish listener
-                        }
-                        executor.execute(conn);
-                    }
-                } catch (IOException ignored) {
-                    ignored.printStackTrace();
-                    return; // finish listener
+                    executor.execute(conn);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
-
+        serverThread.setDaemon(true);
+        serverThread.start();
         started = true;
     }
 
