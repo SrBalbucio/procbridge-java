@@ -6,17 +6,17 @@
 
     <groupId>co.gongzh.procbridge</groupId>
     <artifactId>procbridge</artifactId>
-    <version>1.1.1</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <name>procbridge</name>
     <description>A super-lightweight IPC (Inter-Process Communication) protocol over TCP socket.</description>
-    <url>https://github.com/gongzhang/procbridge-java</url>
+    <url>https://github.com/SrBalbucio/procbridge-java</url>
 
     <licenses>
         <license>
             <name>MIT License</name>
-            <url>https://github.com/gongzhang/procbridge-java/blob/master/LICENSE</url>
+            <url>https://github.com/SrBalbucio/procbridge-java/blob/master/LICENSE</url>
         </license>
     </licenses>
 
@@ -25,13 +25,11 @@
             <name>Gong Zhang</name>
             <email>gong@me.com</email>
         </developer>
+        <developer>
+            <name>João Gabriel</name>
+            <email>srbalbuciogf@gmail.com</email>
+        </developer>
     </developers>
-
-    <scm>
-        <connection>scm:git:git@github.com:gongzhang/procbridge-java.git</connection>
-        <developerConnection>scm:git:git@github.com:gongzhang/procbridge-java.git</developerConnection>
-        <url>git@github.com:gongzhang/procbridge-java.git</url>
-    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -88,14 +86,16 @@
                 </plugins>
             </build>
             <distributionManagement>
-                <snapshotRepository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-                </snapshotRepository>
                 <repository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                    <id>hyperpowered-maven-releases</id>
+                    <name>HyperPowered Maven Repository</name>
+                    <url>https://maven.hyperpowered.net/releases</url>
                 </repository>
+                <snapshotRepository>
+                    <id>hyperpowered-maven-snapshots</id>
+                    <name>HyperPowered Maven Repository</name>
+                    <url>https://maven.hyperpowered.net/snapshots</url>
+                </snapshotRepository>
             </distributionManagement>
         </profile>
     </profiles>

@@ -57,13 +57,17 @@ public class Client {
         return executor;
     }
 
+    public Socket getSocket() throws IOException {
+        return new Socket(host, port);
+    }
+
     @Nullable
     public final Object request(@Nullable String method, @Nullable Object payload) throws ClientException, TimeoutException, ServerException {
         final StatusCode[] respStatusCode = { null };
         final Object[] respPayload = { null };
         final Throwable[] innerException = { null };
 
-        try (final Socket socket = new Socket(host, port)) {
+        try (final Socket socket = getSocket()) {
             Runnable task = () -> {
                 try (OutputStream os = socket.getOutputStream();
                      InputStream is = socket.getInputStream()) {

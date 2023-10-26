@@ -58,12 +58,17 @@ public class Server {
     }
 
     @SneakyThrows
+    public synchronized ServerSocket getServerSocket(){
+        return new ServerSocket(this.port);
+    }
+
+    @SneakyThrows
     public synchronized void start() {
         if (started) {
             throw new IllegalStateException("server already started");
         }
 
-        this.serverSocket = new ServerSocket(this.port);
+        this.serverSocket = getServerSocket();
         ExecutorService executor = Executors.newCachedThreadPool();
 
         Thread serverThread = new Thread(() -> {
